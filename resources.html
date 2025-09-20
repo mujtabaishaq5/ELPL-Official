@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About ELPL</title>
+  <link rel="icon" type="image/svg" href="Elpl-neu.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .CodeMirror { height: 400px !important; font-size: 16px; line-height: 1.5; background-color: #0f172a !important; color: #e0f2fe !important; }
+    .cm-keyword { color: #7dd3fc; font-weight: bold; }
+    .cm-comment { color: #94a3b8; font-style: italic; }
+    .cm-number { color: #fca5a5; }
+    .cm-string { color: #6ee7b7; }
+    .cm-variable { color: #facc15; }
+    #output::-webkit-scrollbar { width: 8px; }
+    #output::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 4px; }
+    #output::-webkit-scrollbar-track { background: #1e293b; }
+    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .animate-spin-slow { animation: spin-slow 2s linear infinite; }
+    .fade-out { opacity: 0; transform: scale(1.2); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .hidden-display { display: none !important; }
+    button span { font-family: monospace; background-color: rgba(255,255,255,0.1); padding: 0.1rem 0.3rem; border-radius: 0.25rem; }
+    .cm-elpl-tag {
+  color: #2596be;
+  font-weight: bold;
+}
+
+  </style>
+</head>
+<body class="bg-slate-900 text-white">
+<div id="splash" class="fixed inset-0 z-50 bg-black flex items-center justify-center">
+    <img id="splashLogo" src="Elpl-neu.svg" alt="ELPL Logo" class="w-32 h-32 animate-spin-slow transition-opacity duration-1000" />
+  </div>
+  <!-- Navigation (optional, copy your main nav if needed) -->
+  <nav class="bg-slate-900 p-4 shadow-lg flex justify-between items-center border-b border-indigo-600">
+    <div class="flex items-center gap-2">
+      <img src="Elpl-neu.svg" alt="ELPL Logo" class="w-10 h-10" />
+      <h1 class="text-xl font-bold text-cyan-400">ELPL Language</h1>
+    </div>
+    <ul class="flex gap-6 text-sm font-semibold">
+      <li><a href="elpl.html" class="hover:text-indigo-400">Playground</a></li>
+      <li><a href="download.html" class="hover:text-indigo-400">Downloads</a></li>
+    </ul>
+  </nav>
+
+  <!-- About Section -->
+ <section id="about" class="px-4 py-16 bg-slate-900">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl font-bold text-indigo-400 mb-4">What is ELPL?</h2>
+    <p class="text-slate-300 text-lg">
+      ELPL (English-like Programming Language) is a modern, beginner-friendly programming language designed to make coding intuitive, readable, and fun. 
+      With a human-readable syntax inspired by natural English, ELPL allows you to focus on problem-solving and logic rather than memorizing complex rules. 
+      It’s perfect for students, educators, hobbyists, and anyone looking to learn programming quickly without the steep learning curve of traditional languages. 
+      Start writing clear, understandable code today and bring your ideas to life effortlessly.
+    </p>
+  </div>
+</section>
+
+
+  <!-- Docs Section -->
+  <section id="docs" class="px-4 py-16 bg-slate-800">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-cyan-400 mb-4">Resources</h2>
+      <ul class="list-disc list-inside text-slate-300 space-y-2">
+        <li>
+          <a href="elpldocs.pdf" target="_blank" class="text-yellow-300 underline">ELPL Docs</a> – Learn the syntax and features
+        </li>
+        <li>
+          <a href="sampleelpl.pdf" target="_blank" class="text-yellow-300 underline">Sample Code</a> – Try common code examples
+        </li>
+      </ul>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer id="footer" class="text-center text-xs text-indigo-600 dark:text-indigo-300 py-4 border-t border-gray-200 dark:border-slate-700 bg-gray-100 dark:bg-slate-900">
+    &copy; 2025–2026 <strong>ELPL by Syed M Mujtaba Ishaq</strong>
+  </footer>
+  <script>
+    window.addEventListener("load", () => {
+      const splash = document.getElementById("splash");
+      splash.classList.add("fade-out");
+      setTimeout(() => splash.classList.add("hidden-display"), 1000);
+    });
+  </script>
+
+</body>
+</html>
