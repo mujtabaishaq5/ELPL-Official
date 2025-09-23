@@ -38,6 +38,13 @@
     body, nav, section, footer, div, pre, a, button {
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
+      @keyframes hand-bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(-10deg); }
+}
+.hand-animate {
+  animation: hand-bounce 1s infinite ease-in-out;
+}
   </style>
 </head>
 
@@ -98,7 +105,19 @@ print "x is " x</textarea>
     </section>
   </main>
 
-
+<div class="fixed bottom-6 right-6 z-50 flex flex-col items-center">
+  <!-- Hand indicator -->
+  <div class="mb-2 text-2xl hand-animate">👇 </div>
+  
+  <!-- VS Code Extension Button -->
+  <a href="https://marketplace.visualstudio.com/items?itemName=SyedIshaq.elpl-vscode-extension" 
+     target="_blank"
+     class="block w-16 h-16 bg-white dark:bg-slate-900 border border-blue-500 rounded-xl shadow-xl flex items-center justify-center hover:scale-105 transition">
+     <img src="https://www-assets.kolide.com/assets/inventory/device_properties/icons/vs-code-extensions-0037129b.png" 
+          alt="extension-image" 
+          class="w-10 h-10" />
+  </a>
+</div>
 
   <!-- Footer -->
   <footer id="footer" class="text-center text-xs text-indigo-600 dark:text-indigo-300 py-4 border-t border-gray-200 dark:border-slate-700 bg-gray-100 dark:bg-slate-900">
