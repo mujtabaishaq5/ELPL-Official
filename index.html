@@ -176,7 +176,7 @@ TYPE: --v   // to check version of the language in browser
       output.textContent = 'Running...';
       const code = editor.getValue();
       try {
-        const res = await fetch("http://localhost:8080/api/run", {
+        const res = await fetch("https://elpl-backend.fly.dev/api/run", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ program: code })
