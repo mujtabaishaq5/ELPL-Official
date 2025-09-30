@@ -18,7 +18,11 @@
   <style>
     html { scroll-behavior: smooth; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .CodeMirror { height: 400px !important; font-size: 16px; line-height: 1.5; }
+    .CodeMirror {
+    height: 600px !important;  /* was 400px */
+  font-size: 16px;
+  line-height: 1.5; 
+   }
     .cm-keyword { color: #7dd3fc; font-weight: bold; }
     .cm-comment { color: #94a3b8; font-style: italic; }
     .cm-number { color: #fca5a5; }
@@ -38,7 +42,7 @@
     body, nav, section, footer, div, pre, a, button {
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
-      @keyframes hand-bounce {
+    @keyframes hand-bounce {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-6px) rotate(-10deg); }
 }
@@ -61,7 +65,7 @@
       <h1 class="text-xl font-bold text-cyan-600 dark:text-cyan-400">ELPL Language</h1>
     </div>
     <ul class="flex gap-6 text-sm font-semibold">
-      <li><a href="#editor" class="hover:text-indigo-600 dark:hover:text-indigo-400">Playground</a></li>
+      <!--li><a href="#editor" class="hover:text-indigo-600 dark:hover:text-indigo-400">Playground</a></li-->
       <li><a href="resources.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">Resources</a></li>
       <li><a href="download.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">Downloads</a></li>
         <li><a href="resources.html#help" class="hover:text-orange-600 dark:hover:text-orange-400 text-red-500">Need help?</a></li>
@@ -96,7 +100,10 @@ then {
 otherwise {
   print "x is not greater"}<<<
 
-print "x is " x</textarea>
+print "x is " x
+TYPE: --v   // to check version of the language in browser
+
+</textarea>
 
       <div class="bg-gray-100 dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
         <h3 class="text-cyan-600 dark:text-cyan-400 font-semibold mb-2">🖥️ Output</h3>
@@ -104,7 +111,6 @@ print "x is " x</textarea>
       </div>
     </section>
   </main>
-
 <div class="fixed bottom-6 right-6 z-50 flex flex-col items-center">
   <!-- Hand indicator -->
   <div class="mb-2 text-2xl hand-animate">👇 </div>
@@ -118,6 +124,8 @@ print "x is " x</textarea>
           class="w-10 h-10" />
   </a>
 </div>
+
+
 
   <!-- Footer -->
   <footer id="footer" class="text-center text-xs text-indigo-600 dark:text-indigo-300 py-4 border-t border-gray-200 dark:border-slate-700 bg-gray-100 dark:bg-slate-900">
@@ -135,7 +143,7 @@ print "x is " x</textarea>
 
     // CodeMirror mode
     CodeMirror.defineMode("elpl", function () {
-      const elplBuiltInFunctions = new Set(["length","sum","max","min","sqrt","pow","floor","ceil","reverse","put","size"]);
+      const elplBuiltInFunctions = new Set(["length","sum","max","min","sqrt","pow","floor","ceil","reverse","put","size", "deepReverse", "delete","has","clear", "insert", "remove","append"]);
       return {
         token: function (stream, state) {
           if (stream.eatSpace()) return null;
@@ -143,7 +151,7 @@ print "x is " x</textarea>
           if (stream.match(">>>")) { state.inComment = true; return "comment"; }
           if (state.inComment) { if (stream.match("<<<")) { state.inComment = false; } else { stream.next(); } return "comment"; }
           if (stream.match(/"(?:[^"\\]|\\.)*"/)) return "string";
-          if (stream.match(/\b(let|be|if|then|otherwise|print|is|greater|function|call|foreach|Map|while|than|repeat|times|mod|and|or|float|Array|to|add|subtract|divide|multiply|not|equal|stop|return|for|less)\b/)) return "keyword";
+          if (stream.match(/\b(let|be|if|then|otherwise|print|is|greater|function|pels|sels|dels|mels|mls|call|foreach|Map|List|while|than|repeat|times|mod|and|or|float|Array|to|add|subtract|divide|multiply|not|equal|stop|return|for|less|use)\b/)) return "keyword";
           if (stream.match(/^\d+/)) return "number";
           if (stream.match(/@java\b/)) return "elpl-tag";
           const word = stream.match(/^[a-zA-Z_][a-zA-Z0-9_]*/);
@@ -168,7 +176,7 @@ print "x is " x</textarea>
       output.textContent = 'Running...';
       const code = editor.getValue();
       try {
-        const res = await fetch("https://elpl-backend.fly.dev/api/run", {
+        const res = await fetch("http://localhost:8080/api/run", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ program: code })
