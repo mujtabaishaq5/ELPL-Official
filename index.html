@@ -165,7 +165,12 @@ print "Hello World"
       viewportMargin: Infinity
     });
 
-    async function runELPL() {
+    function runELPL(){
+      const output = document.getElementById('output');
+      output.textContent = 'Down for Maintenance, Check back soon :)';
+    }
+
+   /* async function runELPL() {
       const output = document.getElementById('output');
       output.textContent = 'Running...';
       const code = editor.getValue();
@@ -180,7 +185,7 @@ print "Hello World"
       } catch (err) {
         output.textContent = "Server Error: " + err.message;
       }
-    }
+    }*/
 
     function downloadCode() {
       const code = editor.getValue();
