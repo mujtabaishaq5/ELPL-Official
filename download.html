@@ -57,6 +57,15 @@
   100% { background-position: 0% 50%; }
 }
 
+@keyframes rip-off {
+  0% { transform: rotate(-2deg) scale(1) translateY(0); opacity: 1; }
+  20% { transform: rotate(15deg) scale(1.05) translateY(-5px); }
+  50% { transform: rotate(45deg) scale(0.9) translateY(-50px); opacity: 0.7; }
+  100% { transform: rotate(90deg) scale(0.5) translateY(-200px) translateX(100px); opacity: 0; }
+}
+.rip-off {
+  animation: rip-off 0.8s forwards ease-in;
+}
 
 
   </style>
@@ -104,7 +113,38 @@
       </div>
         <button class="tab-button bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold transition" data-tab="linux">Linux</button>
       </div>
+<!-- Sticky Note Patch Notes -->
+<div id="sticky-patch" class="absolute top-20 left-8 z-50 w-72 pointer-events-auto transform rotate-[-2deg]">
 
+  <!-- Sticky Note Box -->
+  <div id="sticky-box" class="relative bg-yellow-100/90 backdrop-blur-sm p-5 rounded-xl
+              shadow-[0_10px_20px_rgba(0,0,0,0.5)]
+              border border-yellow-300
+              transform transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_15px_25px_rgba(0,0,0,0.6)]">
+
+    <!-- Close Button -->
+    <button id="close-sticky" class="absolute top-2 right-2 text-gray-700 hover:text-black font-bold text-lg">
+      &times;
+    </button>
+
+    <h4 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
+      <span>📝 Update</span>
+      <span class="text-xs bg-yellow-300 px-2 py-0.5 rounded-md">Latest</span>
+    </h4>
+
+    <ul class="text-gray-800 text-left space-y-1 list-disc list-inside text-sm">
+      <li>Improved stability</li>
+      <li>Optimized performance</li>
+      <li>Improved Interoperability with Java</li>
+      <li>Introducing Standard Libraries</li>
+      <li>Bug fixes</li>
+    </ul>
+
+  </div>
+
+  <!-- Optional Glow Behind Sticky -->
+  <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-yellow-300 to-yellow-200 opacity-20 blur-2xl -z-10"></div>
+</div>
       <!-- Tab Content -->
      <!-- Tab Content -->
 <div id="tab-content" class="flex flex-col items-center gap-8 text-center">
@@ -117,13 +157,13 @@
     <a href="ELPL.zip" download 
        class="relative inline-block bg-green-600 hover:bg-green-700 text-white px-10 py-5 rounded-2xl font-extrabold text-lg transition-transform transform hover:scale-105 shadow-xl">
       Download ELPL for macOS Intel
-      <!--span class="absolute -top-4 left-1/2 -translate-x-1/2 
+      <span class="absolute -top-4 left-1/2 -translate-x-1/2 
         bg-gradient-to-r from-purple-600 to-blue-500
         text-white text-sm tracking-wide px-4 py-1.5 
         rounded-full font-bold uppercase shadow-lg
         animate-pulse">
         New!!
-    </span-->
+    </span>
     </a>
 
     <!-- Release Info -->
@@ -247,7 +287,17 @@ tabButtons.forEach(button => {
   });
 });
 
+const sticky = document.getElementById("sticky-patch");
+  const stickyBox = document.getElementById("sticky-box");
+  const closeSticky = document.getElementById("close-sticky");
 
+  closeSticky.addEventListener("click", () => {
+    stickyBox.classList.add("rip-off");
+    // Remove the whole sticky after animation ends
+    stickyBox.addEventListener("animationend", () => {
+      sticky.remove();
+    });
+  });
   </script>
 </body>
 </html>
