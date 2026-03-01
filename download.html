@@ -232,43 +232,51 @@
     </div>
   </div>
 </div-->
-
   <!-- Windows -->
-  <div class="tab-panel bg-white dark:bg-slate-900 p-10 rounded-2xl shadow-2xl max-w-2xl w-full" id="mac-x64">
-    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-6">Windows x64</h3>
+<div class="tab-panel bg-white dark:bg-slate-900 p-10 rounded-2xl shadow-2xl max-w-2xl w-full hidden" id="windows">
+  
+  <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-6">
+    Windows (x64)
+  </h3>
 
-    <!-- Download Button -->
-    <a href="" class="disabled-link" 
-       class="relative inline-block bg-green-600 hover:bg-green-700 text-white px-10 py-5 rounded-2xl font-extrabold text-lg transition-transform transform hover:scale-105 shadow-xl">
-      Download ELPL for Windows x64
-      <!--span class="absolute -top-4 left-1/2 -translate-x-1/2 
-        bg-gradient-to-r from-purple-600 to-blue-500
-        text-white text-sm tracking-wide px-4 py-1.5 
-        rounded-full font-bold uppercase shadow-lg
-        animate-pulse">
-        New!!
-      </span-->
-    </a>
+  <!-- Disabled Download Button -->
+  <button 
+    disabled
+    class="relative inline-block bg-gray-400 text-white px-10 py-5 rounded-2xl font-extrabold text-lg cursor-not-allowed opacity-60 shadow-xl">
+    
+    Download ELPL for Windows
+    
+    <span class="absolute -top-4 left-1/2 -translate-x-1/2 
+      bg-indigo-600 text-white text-xs tracking-wide px-4 py-1.5 
+      rounded-full font-bold uppercase shadow-lg">
+      Coming Soon
+    </span>
+  </button>
 
-    <!-- Release Info -->
-    <div class="mt-6 flex justify-center">
-      <p class="inline-flex items-center gap-3 
-         bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 text-sm font-medium 
-         px-5 py-2 rounded-full border border-gray-200 dark:border-slate-600 shadow-md">
-        <span class="text-gray-500 dark:text-gray-400 text-lg">📦</span>
-        <span>Stable Release</span>
-        <span class="bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 text-xs font-mono px-3 py-1 rounded-md">
-          v6.6.6
-        </span>
-      </p>
-    </div>
-
-    <!-- Instructions -->
-    <p class="text-slate-400 dark:text-slate-300 mt-6 text-base max-w-xl mx-auto">
-      After downloading, unzip and move the binary to a directory in your PATH 
-      (e.g., <code>/usr/local/bin</code>) to run ELPL from the command prompt or VS Code extension.
+  <!-- Release Info -->
+  <div class="mt-6 flex justify-center">
+    <p class="inline-flex items-center gap-3 
+       bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-200 text-sm font-medium 
+       px-5 py-2 rounded-full border border-gray-200 dark:border-slate-600 shadow-md">
+      
+      <span class="text-gray-500 dark:text-gray-400 text-lg">📦</span>
+      <span>Release Status</span>
+      
+      <span class="bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-gray-200 text-xs font-mono px-3 py-1 rounded-md">
+        In Development
+      </span>
     </p>
   </div>
+
+  <!-- Instructions -->
+  <p class="text-slate-400 dark:text-slate-300 mt-6 text-base max-w-xl mx-auto">
+    The Windows build is currently under active development. 
+    We're optimizing compatibility and performance before release.
+  </p>
+
+</div>
+
+
 <!--Linux-->
 
 <div class="tab-panel relative p-10 rounded-2xl max-w-2xl w-full mx-auto hidden" id="linux">
