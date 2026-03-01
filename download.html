@@ -66,7 +66,7 @@
 .rip-off {
   animation: rip-off 0.8s forwards ease-in;
 }
-.disabled-link {
+#disabled-link {
   pointer-events: none;
   cursor: default; /* Changes the cursor to indicate it's not clickable */
   color: gray;    /* Optional: styles the link to look disabled */
@@ -240,18 +240,19 @@
   </h3>
 
   <!-- Disabled Download Button -->
-  <button 
-    disabled
+  <a href="..." 
+    id="disabled-link"
     class="relative inline-block bg-gray-400 text-white px-10 py-5 rounded-2xl font-extrabold text-lg cursor-not-allowed opacity-60 shadow-xl">
     
     Download ELPL for Windows
-    
-    <span class="absolute -top-4 left-1/2 -translate-x-1/2 
-      bg-indigo-600 text-white text-xs tracking-wide px-4 py-1.5 
-      rounded-full font-bold uppercase shadow-lg">
-      Coming Soon
-    </span>
-  </button>
+   <span class="absolute -top-4 left-1/2 -translate-x-1/2 
+        bg-gradient-to-r from-purple-600 to-blue-500
+        text-white text-sm tracking-wide px-4 py-1.5 
+        rounded-full font-bold uppercase shadow-lg
+        animate-pulse">
+        Coming soon
+      </span>
+  </a>
 
   <!-- Release Info -->
   <div class="mt-6 flex justify-center">
