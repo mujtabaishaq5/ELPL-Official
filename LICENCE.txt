@@ -1,0 +1,24 @@
+END USER LICENSE AGREEMENT (EULA) FOR ELPL PLUGIN
+
+IMPORTANT-READ CAREFULLY: This End User License Agreement ("EULA") is a legal agreement between you (either an individual or a single entity) and the author ("Developer") of the ELPL Plugin ("Plugin").
+
+By installing, copying, or otherwise using the Plugin, you agree to be bound by the terms of this EULA. If you do not agree to the terms of this EULA, do not install or use the Plugin.
+
+1. GRANT OF LICENSE
+The Developer grants you a personal, non-exclusive, non-transferable, limited license to download, install, and use the Plugin strictly for your own development and testing purposes with JetBrains IDEs.
+
+2. RESTRICTIONS
+You may not:
+- Modify, reverse-engineer, decompile, or disassemble the Plugin in whole or in part.
+- Create derivative works based upon the Plugin.
+- Rent, lease, lend, sell, redistribute, or sublicense the Plugin to any third party.
+- Remove any proprietary notices or labels on the Plugin.
+
+3. INTELLECTUAL PROPERTY
+The Plugin is protected by copyright and other intellectual property laws and treaties. The Developer owns all title, copyright, and other intellectual property rights in the Plugin.
+
+4. DISCLAIMER OF WARRANTY
+THE PLUGIN IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+
+5. LIMITATION OF LIABILITY
+IN NO EVENT SHALL THE DEVELOPER BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT, OR CONSEQUENTIAL DAMAGES WHATSOEVER ARISING OUT OF OR IN CONNECTION WITH THE USE OR INABILITY TO USE THE PLUGIN.
