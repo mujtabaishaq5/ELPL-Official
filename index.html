@@ -1,228 +1,113 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ELPL Language</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELPL - Website Shifted</title>
   <link rel="icon" type="image/svg" href="Elpl-neu.svg" />
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- CodeMirror -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/material-darker.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/clike/clike.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/matchbrackets.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/closebrackets.min.js"></script>
-
-  <style>
-    html { scroll-behavior: smooth; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .CodeMirror {
-    height: 600px !important;  /* was 400px */
-  font-size: 16px;
-  line-height: 1.5; 
-   }
-    .cm-keyword { color: #7dd3fc; font-weight: bold; }
-    .cm-comment { color: #94a3b8; font-style: italic; }
-    .cm-number { color: #fca5a5; }
-    .cm-string { color: #6ee7b7; }
-    .cm-variable { color: #facc15; }
-    #output::-webkit-scrollbar { width: 8px; }
-    #output::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 4px; }
-    #output::-webkit-scrollbar-track { background: #1e293b; }
-    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .animate-spin-slow { animation: spin-slow 2s linear infinite; }
-    .fade-out { opacity: 0; transform: scale(1.2); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .hidden-display { display: none !important; }
-    button span { font-family: monospace; background-color: rgba(255,255,255,0.1); padding: 0.1rem 0.3rem; border-radius: 0.25rem; }
-    .cm-elpl-tag { color: #2596be; font-weight: bold; }
-
-    /* Smooth theme transition */
-    body, nav, section, footer, div, pre, a, button {
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            slate: {
+              850: '#152238',
+            }
+          }
+        }
+      }
     }
-    @keyframes hand-bounce {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(-10deg); }
-}
-.hand-animate {
-  animation: hand-bounce 1s infinite ease-in-out;
-}
+  </script>
+  <style>
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    
+    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .animate-spin-slow { animation: spin-slow 8s linear infinite; }
   </style>
 </head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-cyan-500 selection:text-white min-h-screen flex flex-col justify-between">
 
-<body class="bg-white text-black dark:bg-slate-950 dark:text-white flex flex-col min-h-screen transition-colors duration-500" id="body">
-  <!-- Splash Screen -->
-  <div id="splash" class="fixed inset-0 z-50 bg-black flex items-center justify-center">
-    <img id="splashLogo" src="Elpl-neu.svg" alt="ELPL Logo" class="w-32 h-32 animate-spin-slow transition-opacity duration-1000" />
-  </div>
+  <!-- Background Glow Orbs -->
+  <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-10 right-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-  <!-- Navigation -->
-  <nav class="bg-gray-100 dark:bg-slate-900 p-4 shadow-lg flex justify-between items-center border-b border-indigo-600">
-    <div class="flex items-center gap-2">
-      <img src="Elpl-neu.svg" alt="ELPL Logo" class="w-10 h-10" />
-      <h1 class="text-xl font-bold text-cyan-600 dark:text-cyan-400">ELPL Language</h1>
+  <!-- Header Branding -->
+  <header class="w-full px-6 py-8 relative z-10">
+    <div class="max-w-4xl mx-auto flex items-center gap-3">
+      <div class="p-2.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 shadow-lg shadow-cyan-500/5">
+        <img src="Elpl-neu.svg" alt="ELPL Logo" class="w-8 h-8" />
+      </div>
+      <span class="text-xl font-black bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent tracking-tight">ELPL</span>
     </div>
-    <ul class="flex gap-6 text-sm font-semibold">
-      <!--li><a href="#editor" class="hover:text-indigo-600 dark:hover:text-indigo-400">Playground</a></li-->
-      <li><a href="resources.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">Resources</a></li>
-      <li><a href="download.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">Downloads</a></li>
-        <li><a href="resources.html#help" class="hover:text-orange-600 dark:hover:text-orange-400 text-red-500">Need help?</a></li>
-      <li>
-        <button id="themeToggle" class="text-sm px-3 py-1 rounded bg-gray-200 dark:bg-slate-700 hover:bg-gray-300 dark:hover:bg-slate-600 text-black dark:text-white transition">🌗 Theme</button>
-      </li>
-    </ul>
-  </nav>
+  </header>
 
-  <main class="flex-grow">
-    <!-- Hero Section -->
-    <section class="text-center py-16 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-slate-900 dark:to-slate-800">
-      <h2 class="text-4xl font-bold mb-4 text-indigo-700 dark:text-indigo-300">Write Human-Friendly Code</h2>
-      <p class="text-gray-600 dark:text-slate-400 max-w-xl mx-auto text-lg">ELPL (English like Programming Language) makes coding intuitive, readable, and fun — even for beginners.</p>
-    </section>
-
-    <!-- Editor Playground -->
-    <section id="editor" class="px-4 py-8 max-w-6xl mx-auto space-y-6">
-      <h2 class="text-2xl font-bold text-cyan-600 dark:text-cyan-300 mb-2">Try ELPL in your browser</h2>
-
-      <div class="flex gap-4 justify-end">
-        <button onclick="runELPL()" class="bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-lg text-white font-semibold transition">▶️ Run<span class="text-sm text-gray-300 ml-2">(Ctrl + Enter / ⌘ + Enter)</span></button>
-        <button onclick="downloadCode()" class="bg-green-600 hover:bg-green-700 px-5 py-2 rounded-lg text-white font-semibold transition">💾 Save<span class="text-sm text-gray-300 ml-2">(Ctrl + S / ⌘ + S)</span></button>
+  <!-- Main Content Center -->
+  <main class="flex-grow flex items-center justify-center px-6 py-12 relative z-10">
+    <div class="max-w-xl w-full text-center animate-fade-in-up">
+      
+      <!-- Status Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono uppercase tracking-widest mb-8 shadow-lg shadow-amber-500/10">
+        <span>🔄</span> Domain Migration Notice
       </div>
 
-      <textarea id="code" class="hidden">// Write ELPL code
-print "Hello World"
+      <!-- Heading -->
+      <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-white mb-6 leading-tight">
+        Our Website Has <br />
+        <span class="bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">New Address</span>
+      </h1>
 
->>> For sample code visit resources or need help click contact support
+      <!-- Description -->
+      <p class="text-slate-300 text-base sm:text-lg mb-10 leading-relaxed max-w-lg mx-auto">
+        We've upgraded our home to a brand-new digital ecosystem. Update your bookmarks to keep exploring the ELPL programming language.
+      </p>
 
-<<<        
-
-</textarea>
-
-      <div class="bg-gray-100 dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
-        <h3 class="text-cyan-600 dark:text-cyan-400 font-semibold mb-2">🖥️ Output</h3>
-        <pre id="output" class="whitespace-pre-wrap overflow-auto text-green-600 dark:text-green-400 font-mono text-base leading-relaxed max-h-80"></pre>
+      <!-- New Address Box / Action -->
+      <div class="bg-slate-900/90 border border-slate-800 p-6 rounded-3xl shadow-2xl backdrop-blur-xl mb-8">
+        <p class="text-xs uppercase font-mono tracking-wider text-slate-400 mb-3">New Permanent Destination</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <code id="target-url" class="text-cyan-300 font-mono bg-slate-950 px-4 py-3 rounded-xl border border-slate-800 text-sm w-full sm:w-auto truncate selection:bg-cyan-500 selection:text-white">https://elpl.org</code>
+          <a href="https://elpl.org" id="redirect-btn" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold px-6 py-3 rounded-xl text-sm transition-all transform hover:scale-105 shadow-xl shadow-indigo-600/20 shrink-0">
+            <span>Visit New Site</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
       </div>
-    </section>
+
+      <!-- Auto Redirect Countdown Footer Info -->
+      <p class="text-xs text-slate-400 font-mono">
+        Redirecting automatically in <span id="countdown" class="text-cyan-400 font-bold">5</span> seconds...
+      </p>
+
+    </div>
   </main>
-<div class="fixed bottom-6 right-6 z-50 flex flex-col items-center">
-  <!-- Hand indicator -->
-  <div class="mb-2 text-2xl hand-animate">👇 </div>
-  
-  <!-- VS Code Extension Button -->
-  <a href="https://marketplace.visualstudio.com/items?itemName=SyedIshaq.elpl-vscode-extension" 
-     target="_blank"
-     class="block w-16 h-16 bg-white dark:bg-slate-900 border border-blue-500 rounded-xl shadow-xl flex items-center justify-center hover:scale-105 transition">
-     <img src="https://images.icon-icons.com/3053/PNG/512/microsoft_visual_studio_code_macos_bigsur_icon_189957.png" 
-          alt="extension-image" 
-          class="w-10 h-10" />
-  </a>
-</div>
-
-
 
   <!-- Footer -->
-  <footer id="footer" class="text-center text-xs text-indigo-600 dark:text-indigo-300 py-4 border-t border-gray-200 dark:border-slate-700 bg-gray-100 dark:bg-slate-900">
-    &copy; 2026–2027 <strong>ELPL by Syed M Mujtaba Ishaq</strong>
+  <footer class="text-center text-xs text-slate-400 py-6 border-t border-slate-900 bg-slate-950 relative z-10">
+    <div class="max-w-4xl mx-auto px-6">
+      <p>&copy; 2025–2026 <strong class="text-slate-200">ELPL by Syed M Mujtaba Ishaq</strong></p>
+    </div>
   </footer>
 
-  <!-- Scripts -->
   <script>
-    // Splash screen
-    window.addEventListener("load", () => {
-      const splash = document.getElementById("splash");
-      splash.classList.add("fade-out");
-      setTimeout(() => splash.classList.add("hidden-display"), 1000);
-    });
+    // Configuration for target URL
+    const targetUrl = "https://elpl-d8625.web.app";
+    let secondsLeft = 5;
+    const countdownEl = document.getElementById("countdown");
 
-    // CodeMirror mode
-    CodeMirror.defineMode("elpl", function () {
-      const elplBuiltInFunctions = new Set(["length","sum","max","min","sqrt","pow","floor","ceil","reverse","put","size", "deepReverse", "delete","has","clear", "insert", "remove","append"]);
-      return {
-        token: function (stream, state) {
-          if (stream.eatSpace()) return null;
-          if (stream.match("//")) { stream.skipToEnd(); return "comment"; }
-          if (stream.match(">>>")) { state.inComment = true; return "comment"; }
-          if (state.inComment) { if (stream.match("<<<")) { state.inComment = false; } else { stream.next(); } return "comment"; }
-          if (stream.match(/"(?:[^"\\]|\\.)*"/)) return "string";
-          if (stream.match(/\b(let|be|if|then|otherwise|print|is|greater|function|pels|sels|dels|mels|mls|call|foreach|Map|List|while|than|repeat|times|mod|and|or|float|Array|to|add|subtract|divide|multiply|not|equal|stop|return|for|less|use)\b/)) return "keyword";
-          if (stream.match(/^\d+/)) return "number";
-          if (stream.match(/@java\b/)) return "elpl-tag";
-          const word = stream.match(/^[a-zA-Z_][a-zA-Z0-9_]*/);
-          if (word) return elplBuiltInFunctions.has(word[0]) ? "builtin" : "variable";
-          stream.next(); return null;
-        },
-        startState: function () { return { inComment: false }; }
-      };
-    });
-
-    const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-      lineNumbers: true,
-      mode: "elpl",
-      theme: "material-darker",
-      matchBrackets: true,
-      autoCloseBrackets: true,
-      viewportMargin: Infinity
-    });
-
-    function runELPL(){
-      const output = document.getElementById('output');
-      output.textContent = 'Temporarily unavailable, Sorry for the inconvenience :(';
-    }
-
-   /* async function runELPL() {
-      const output = document.getElementById('output');
-      output.textContent = 'Running...';
-      const code = editor.getValue();
-      try {
-        const res = await fetch("https://elpl-backend.fly.dev/api/run", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ program: code })
-        });
-        const result = await res.text();
-        output.textContent = result;
-      } catch (err) {
-        output.textContent = "Server Error: " + err.message;
+    // Countdown and automatic redirection timer
+    const timer = setInterval(() => {
+      secondsLeft--;
+      if (countdownEl) {
+        countdownEl.textContent = secondsLeft;
       }
-    }*/
-
-    function downloadCode() {
-      const code = editor.getValue();
-      const blob = new Blob([code], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "code.elpl";
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    // Keyboard shortcuts
-    document.addEventListener("keydown", function (e) {
-      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { e.preventDefault(); runELPL(); }
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") { e.preventDefault(); downloadCode(); }
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "d") { e.preventDefault(); toggleTheme(); }
-    });
-
-    // Theme toggle
-    const themeToggleBtn = document.getElementById("themeToggle");
-    let isDark = true;
-    function toggleTheme() {
-      const html = document.documentElement;
-      isDark = !isDark;
-      if (isDark) {
-        html.classList.add("dark");
-        editor.setOption("theme", "material-darker");
-        themeToggleBtn.textContent = "🌗 Dark";
-      } else {
-        html.classList.remove("dark");
-        editor.setOption("theme", "default");
-        themeToggleBtn.textContent = "🌞 Light";
+      if (secondsLeft <= 0) {
+        clearInterval(timer);
+        window.location.href = targetUrl;
       }
-    }
-    themeToggleBtn.addEventListener("click", toggleTheme);
+    }, 1000);
   </script>
 </body>
 </html>
